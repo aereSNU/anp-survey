@@ -1,8 +1,8 @@
 /**
  * 농가 평가체계 AHP 설문 — 응답 수집 및 결과 계산 (Google Apps Script)
  *
- * 응답:  설문 홈페이지가 보낸 응답을 '응답' 시트에 평가자 번호별로 한 줄씩 저장합니다.
- *        같은 평가자 번호로 다시 제출하면 그 줄을 덮어씁니다.
+ * 응답:  설문 홈페이지가 보낸 응답을 '응답' 시트에 응답자 이름별로 한 줄씩 저장합니다.
+ *        같은 이름으로 다시 제출하면 그 줄을 덮어씁니다.
  * 결과:  시트 상단 메뉴 [AHP] > [결과 계산]을 누르면 아래 세 시트를 새로 씁니다.
  *        - 종합중요도 : 모든 항목의 상위 항목 안 비중과 최종 가중치(통합·평가자별), 최하위 요소 순위
  *        - 세부결과   : 비교 묶음별 쌍대비교 값, 결과 중요도, 비일관성 비율(통합·평가자별),
@@ -112,7 +112,7 @@ function ranks(values){ // 큰 값이 1위, 계산할 수 없는 값은 순위 �
 
 /* ---------- 응답 받기 ---------- */
 function header_(){
-  const h=["평가자 번호","제출 시각"];
+  const h=["응답자 이름","제출 시각"];
   ALL_GROUPS.forEach(g=>{ pairs(g.items.length).forEach(([i,j])=>h.push(g.label+": "+g.items[i]+" vs "+g.items[j]+" (a_ij)")); if(g.items.length>2) h.push(g.label+": CR"); h.push(g.label+": 수정요청 후 유지"); });
   h.push("원자료(JSON)");
   return h;
@@ -124,7 +124,7 @@ function doPost(e){
   try{
     const p=JSON.parse(e.postData.contents);
     const id=evaluatorOf_(p);
-    if(!id) throw new Error("평가자 번호가 없습니다");
+    if(!id) throw new Error("응답자 이름이 없습니다");
     const ss=SpreadsheetApp.getActiveSpreadsheet();
     let sh=ss.getSheetByName(RESP_SHEET);
     const head=header_();
@@ -320,5 +320,5 @@ function importCode(){
   if(!/^AHP\d:/.test(t)){ ui.alert("코드 형식이 올바르지 않습니다."); return; }
   const p=JSON.parse(Utilities.newBlob(Utilities.base64Decode(t.slice(5))).getDataAsString("UTF-8"));
   const out=JSON.parse(doPost({postData:{contents:JSON.stringify(p)}}).getContent());
-  ui.alert(out.ok ? "평가자 "+evaluatorOf_(p)+"의 응답을 추가했습니다." : "추가하지 못했습니다: "+out.error);
+  ui.alert(out.ok ? evaluatorOf_(p)+" 님의 응답을 추가했습니다." : "추가하지 못했습니다: "+out.error);
 }
