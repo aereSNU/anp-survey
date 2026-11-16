@@ -125,6 +125,7 @@ tr.strong td{font-weight:600}
 .note{background:var(--accent-weak);border-radius:8px;padding:12px 14px;display:flex;flex-direction:column;gap:4px}
 h3.sub{font-size:1rem;margin:0;color:var(--accent);font-weight:600}
 hr.sep{border:0;border-top:2px solid var(--line);margin:4px 0;width:100%}
+.guidelink{display:inline-block;background:var(--accent-weak);color:var(--accent);font-weight:600;text-decoration:none;border-radius:8px;padding:8px 12px;font-size:.92rem}
 </style>
 </head>
 <body>
@@ -155,7 +156,7 @@ const NODES = {};
 const GROUPS = [];
 (function collect(n){ if(n.children && n.children.length>=2){
   const isTop = n.depth===0;
-  GROUPS.push({id:n.id, node:n, items:n.children.map(c=>c.name),
+  GROUPS.push({id:n.id, node:n, items:n.children.map(c=>n.depth>=1 ? `${c.name}(${n.name})` : c.name),
     title: isTop ? "부문 간 비교" : (n.depth===1 ? `${n.name} 부문` : n.name),
     parentLabel: isTop ? "평가체계 전체" : n.name,
     q: isTop ? "농가의 가치를 평가할 때, 두 부문 중 어느 쪽이 더 중요하다고 보십니까?"
@@ -180,10 +181,10 @@ const clusterSources = Pt => PILLARS.filter(P=>Pt.children.some(t=>sourcesIn(t,P
 const ANP_SCREENS = [];
 ELEMS.forEach(t=>{
   const gs=[];
-  PILLARS.forEach(P=>{ const src=sourcesIn(t,P); if(src.length>=2) gs.push({id:`N.${t.id}.${P.id}`, kind:"anp", items:src.map(c=>c.name),
+  PILLARS.forEach(P=>{ const src=sourcesIn(t,P); if(src.length>=2) gs.push({id:`N.${t.id}.${P.id}`, kind:"anp", items:src.map(c=>`${c.name}(${P.name})`),
     sub:`${P.name} 부문 요소 사이의 비교`, title:`${t.name} ← ${P.name}`,
-    q:`[${t.name}]에 미치는 영향 측면에서, 두 요소 중 어느 쪽이 더 큰 영향을 준다고 보십니까?`}); });
-  if(gs.length) ANP_SCREENS.push({title:t.name, heading:`${t.name}에 미치는 영향`, groups:gs});
+    q:`[${t.name}(${t.parent.name})]에 미치는 영향 측면에서, 두 요소 중 어느 쪽이 더 큰 영향을 준다고 보십니까?`}); });
+  if(gs.length) ANP_SCREENS.push({title:t.name, heading:`${t.name}(${t.parent.name})에 미치는 영향`, groups:gs});
 });
 { const cgs=[];
   PILLARS.forEach(Pt=>{ const src=clusterSources(Pt); if(src.length>=2) cgs.push({id:`K.${Pt.id}`, kind:"anp",
@@ -294,6 +295,7 @@ function introView(){
   const nA=cnt(GROUPS), nN=cnt(ALLGROUPS.filter(g=>g.kind==="anp"));
   c.append(
     el("p",{},"본 설문은 개별 농가의 환경·사회·경제 부문 가치를 평가하기 위해, 각 평가 요소의 상대적 중요도와 요소 사이의 영향 관계를 전문가 판단으로 산출하는 AHP(계층분석법)·ANP(네트워크분석법) 조사입니다."),
+    el("p",{},el("a",{href:"guide.html",target:"_blank",rel:"noopener",class:"guidelink"},"처음이시면 응답 방법 안내(화면 예시)를 먼저 확인해 주세요 →")),
     el("h2",{},"평가 계층"),
     hierarchySVG(),
     el("p",{class:"muted small"},`설문은 두 부분으로 되어 있습니다. 1부(${nA}문항)에서는 같은 상위 항목 아래의 요소끼리 어느 쪽이 더 중요한지 비교합니다. 2부(${nN}문항)에서는 서로 영향을 주고받는 요소끼리 어느 쪽이 더 큰 영향을 주는지 비교합니다. 모두 ${nA+nN}문항입니다.`),
@@ -359,7 +361,7 @@ function screenView(sc){
   if(sc.first) c.append(el("div",{class:"note"},
     el("b",{},"2부: 영향 비교"),
     el("p",{class:"small"},"여기부터는 중요도가 아니라 '영향의 크기'를 묻습니다. 사전 조사(DEMATEL)에서 서로 영향이 있다고 나타난 관계만 비교합니다."),
-    el("p",{class:"small"},"예: [수익성]에 미치는 영향 측면에서 토양과 수질을 비교하는 문항은, 토양과 수질 가운데 어느 쪽이 수익성을 더 크게 좌우하는지를 묻는 것입니다.")));
+    el("p",{class:"small"},"예: [수익성(경제)]에 미치는 영향 측면에서 토양(환경)과 수질(환경)을 비교하는 문항은, 토양과 수질 가운데 어느 쪽이 수익성을 더 크게 좌우하는지를 묻는 것입니다.")));
   if(sc.intro) c.append(el("div",{class:"note"},el("p",{class:"small"},sc.intro)));
   const blocks=sc.groups.map(g=>({g,...groupBlock(g, sc.groups.length>1)}));
   blocks.forEach((b,k)=>{ if(k>0) c.append(el("hr",{class:"sep"})); c.append(b.box); });

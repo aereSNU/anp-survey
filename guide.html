@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>응답 방법 안내 · 농가 평가체계 AHP·ANP 설문</title>
+<meta property="og:title" content="응답 방법 안내 · 농가 평가체계 AHP·ANP 설문">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@700&family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: one narrow reading column; a stepper rail on top; each comparison is a ruled card with a 17-point scale. */
+:root{
+  --bg:#f4f6f2; --surface:#ffffff; --fg:#1c231e; --muted:#5b665e; --line:#dbe1d9;
+  --accent:#3d6a48; --accent-fg:#ffffff; --accent-weak:#e2ebe2;
+  --warn:#a9521c; --warn-bg:#f8e9df; --ok:#2e7a4c; --ok-bg:#e1f0e6;
+  --display:"Gowun Batang", "Noto Serif KR", serif;
+  --body:"IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#111512; --surface:#191f1b; --fg:#e4eae5; --muted:#99a59c; --line:#2b342e;
+  --accent:#86b691; --accent-fg:#0f1a12; --accent-weak:#22332670;
+  --warn:#e6955f; --warn-bg:#3a251a; --ok:#7fcb9b; --ok-bg:#1c3325; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#111512; --surface:#191f1b; --fg:#e4eae5; --muted:#99a59c; --line:#2b342e;
+  --accent:#86b691; --accent-fg:#0f1a12; --accent-weak:#22332670;
+  --warn:#e6955f; --warn-bg:#3a251a; --ok:#7fcb9b; --ok-bg:#1c3325; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15.5px;line-height:1.7;margin:0;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 64px}
+.wrap{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
+h1,h2{font-family:var(--display);font-weight:700;margin:0;line-height:1.35;text-wrap:balance}
+h1{font-size:1.75rem} h2{font-size:1.25rem}
+p{margin:0}
+.eyebrow{font-size:.78rem;letter-spacing:.08em;color:var(--muted);font-weight:600}
+.lead{color:var(--muted)}
+.facts{display:flex;flex-wrap:wrap;gap:8px}
+.facts span{background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:4px 12px;font-size:.88rem}
+section{display:grid;grid-template-columns:2.2em 1fr;gap:4px 14px}
+section .no{font-family:var(--mono);color:var(--accent);font-size:1.1rem;padding-top:2px}
+section .body{display:flex;flex-direction:column;gap:12px;min-width:0}
+figure{margin:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--surface)}
+figure img{display:block;width:100%;height:auto}
+ul{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:4px}
+.tip{background:var(--accent-weak);border-radius:8px;padding:12px 14px;font-size:.93rem}
+.warn{background:var(--warn-bg);border-radius:8px;padding:12px 14px;font-size:.93rem}
+b.k{color:var(--accent)}
+.btn{display:inline-block;background:var(--accent);color:var(--accent-fg);text-decoration:none;font-weight:600;border-radius:8px;padding:10px 18px}
+a{color:var(--accent)}
+@media print{body{padding:0;font-size:12.5px}.wrap{gap:18px}section{break-inside:avoid}.noprint{display:none}figure{max-width:88%}section:first-of-type figure{max-width:58%}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header style="display:flex;flex-direction:column;gap:10px">
+  <span class="eyebrow">농업 빅데이터 및 기술경제 연구실</span>
+  <h1>설문 응답 방법 안내</h1>
+  <p class="lead">농가 평가체계 AHP·ANP 설문은 두 요소를 짝지어 비교하는 방식입니다. 아래 화면 예시를 한 번 훑어보시면 바로 응답하실 수 있습니다.</p>
+  <div class="facts"><span>약 15분</span><span>1부 중요도 비교 15문항</span><span>2부 영향 비교 28문항</span><span>같은 기기·브라우저에서는 중간에 닫아도 이어서 응답 가능</span></div>
+  <p class="noprint"><a class="btn" href="./">설문 바로 가기</a></p>
+</header>
+
+<section><span class="no">1</span><div class="body">
+  <h2>시작 화면</h2>
+  <p>평가 계층(목표 → 부문 → 요소)을 확인하시고 <b>성함</b>을 입력한 뒤 [설문 시작]을 누릅니다. 같은 성함으로 다시 제출하시면 이전 응답이 새 응답으로 바뀝니다.</p>
+  <figure><img src="guide/01-start.png" alt="시작 화면: 평가 계층도와 성함 입력칸" loading="lazy"></figure>
+</div></section>
+
+<section><span class="no">2</span><div class="body">
+  <h2>척도 읽는 법</h2>
+  <p>가운데 <b class="k">1</b>은 두 요소가 같다는 뜻입니다. 왼쪽 요소가 더 중요하면 왼쪽으로, 오른쪽 요소가 더 중요하면 오른쪽으로 갈수록 숫자가 커집니다.</p>
+  <ul>
+    <li><b class="k">3</b> 약간 더 · <b class="k">5</b> 상당히 더 · <b class="k">7</b> 매우 더 · <b class="k">9</b> 극히 더 (2·4·6·8은 그 사이)</li>
+    <li>요소 이름 옆 괄호는 그 요소가 속한 부문입니다. 예: 토양(환경)</li>
+  </ul>
+  <figure><img src="guide/02-ahp.png" alt="토양(환경)과 수질(환경) 비교에서 토양 쪽 3을 선택한 화면" loading="lazy"></figure>
+  <p>위 예시는 <b>"토양이 수질보다 약간 더 중요하다(3)"</b>는 응답입니다. 선택하면 척도 아래에 뜻이 문장으로 표시됩니다.</p>
+</div></section>
+
+<section><span class="no">3</span><div class="body">
+  <h2>1부: 중요도 비교</h2>
+  <p>같은 상위 항목에 속한 요소끼리 <b>농가를 평가할 때 어느 쪽이 더 중요한지</b> 고릅니다. 부문 간 비교(환경·사회·경제) → 환경 → 사회 → 경제 순서로 나옵니다.</p>
+  <figure><img src="guide/03-ahp-done.png" alt="환경 부문 비교를 모두 응답하고 일관성 양호가 표시된 화면" loading="lazy"></figure>
+  <p>한 화면의 문항을 모두 답하면 아래에 <b>일관성</b>이 표시됩니다. '일관성 양호'면 [다음]으로 넘어가시면 됩니다.</p>
+</div></section>
+
+<section><span class="no">4</span><div class="body">
+  <h2>일관성 부족 안내가 나올 때</h2>
+  <p>숫자는 '몇 배'로 계산되어 서로 이어집니다. 아래 예시에서는 수익성이 생산성보다 5, 안정성보다 3만큼 중요하다고 답했으니 생산성보다 안정성이 조금 더 중요한 셈인데, 마지막 문항에서 안정성이 생산성보다 5만큼 중요하다고 답해 정도가 어긋났습니다.</p>
+  <figure><img src="guide/04-cr.png" alt="일관성 부족 안내와 가장 어긋난 문항이 표시된 화면" loading="lazy"></figure>
+  <div class="warn">가장 어긋난 문항이 붉게 표시됩니다. 그 문항이나 관련된 다른 문항을 다시 살펴봐 주세요. 검토하신 뒤에도 판단을 유지하고 싶으시면 <b>[검토했습니다. 현재 응답으로 진행]</b>을 누르시면 됩니다.</div>
+</div></section>
+
+<section><span class="no">5</span><div class="body">
+  <h2>2부: 영향 비교</h2>
+  <p>여기부터는 중요도가 아니라 <b>영향의 크기</b>를 묻습니다. 사전 조사(DEMATEL)에서 서로 영향이 있다고 나타난 관계만 나옵니다. 영향을 받는 요소별로 한 화면씩, 같은 부문에 속한 요소끼리 비교합니다.</p>
+  <figure><img src="guide/05-anp.png" alt="수익성(경제)에 미치는 영향 측면에서 환경 요소들을 비교하는 화면" loading="lazy"></figure>
+  <p>위 예시의 첫 문항은 <b>"토양과 수질 중 수익성을 더 크게 좌우하는 것은 토양이며, 그 정도는 약간(3)"</b>이라는 응답입니다.</p>
+</div></section>
+
+<section><span class="no">6</span><div class="body">
+  <h2>2부 마지막: 부문 간 영향</h2>
+  <p>한 부문의 요소들이 받는 영향이 <b>어느 부문에서 더 많이 오는지</b> 비교합니다. <b>'○○ 부문 내부'</b>는 그 부문 요소들끼리 서로 주고받는 영향을 뜻합니다.</p>
+  <figure><img src="guide/06-cluster.png" alt="환경 부문의 요소들이 받는 영향에서 환경 부문 내부와 사회 부문을 비교하는 화면" loading="lazy"></figure>
+  <p>위 예시는 <b>"환경 요소들은 사회 요소들보다 환경 요소들끼리 주고받는 영향을 조금 더 크게 받는다(2)"</b>는 응답입니다.</p>
+</div></section>
+
+<section><span class="no">7</span><div class="body">
+  <h2>확인 후 제출</h2>
+  <p>1부 응답으로 계산된 본인의 가중치와 묶음별 일관성이 표시됩니다. 아래 버튼을 누르면 해당 화면으로 돌아가 수정할 수 있습니다. 확인하신 뒤 [제출하기]를 누르시면 끝납니다.</p>
+  <figure><img src="guide/07-review.png" alt="응답 확인 화면: 항목별 가중치 표와 일관성 버튼, 제출하기 버튼" loading="lazy"></figure>
+  <div class="tip">제출 후에도 [응답 수정하기]로 고쳐서 다시 제출하실 수 있습니다. 같은 성함으로 제출하면 이전 응답을 대체합니다.</div>
+</div></section>
+
+<p class="noprint" style="text-align:center"><a class="btn" href="./">설문 시작하기</a></p>
+</div>
+</body>
+</html>
