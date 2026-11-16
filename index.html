@@ -125,7 +125,6 @@ tr.strong td{font-weight:600}
 .note{background:var(--accent-weak);border-radius:8px;padding:12px 14px;display:flex;flex-direction:column;gap:4px}
 h3.sub{font-size:1rem;margin:0;color:var(--accent);font-weight:600}
 hr.sep{border:0;border-top:2px solid var(--line);margin:4px 0;width:100%}
-.guidelink{display:inline-block;background:var(--accent-weak);color:var(--accent);font-weight:600;text-decoration:none;border-radius:8px;padding:8px 12px;font-size:.92rem}
 </style>
 </head>
 <body>
@@ -295,7 +294,6 @@ function introView(){
   const nA=cnt(GROUPS), nN=cnt(ALLGROUPS.filter(g=>g.kind==="anp"));
   c.append(
     el("p",{},"본 설문은 개별 농가의 환경·사회·경제 부문 가치를 평가하기 위해, 각 평가 요소의 상대적 중요도와 요소 사이의 영향 관계를 전문가 판단으로 산출하는 AHP(계층분석법)·ANP(네트워크분석법) 조사입니다."),
-    el("p",{},el("a",{href:"guide.html",target:"_blank",rel:"noopener",class:"guidelink"},"처음이시면 응답 방법 안내(화면 예시)를 먼저 확인해 주세요 →")),
     el("h2",{},"평가 계층"),
     hierarchySVG(),
     el("p",{class:"muted small"},`설문은 두 부분으로 되어 있습니다. 1부(${nA}문항)에서는 같은 상위 항목 아래의 요소끼리 어느 쪽이 더 중요한지 비교합니다. 2부(${nN}문항)에서는 서로 영향을 주고받는 요소끼리 어느 쪽이 더 큰 영향을 주는지 비교합니다. 모두 ${nA+nN}문항입니다.`),
