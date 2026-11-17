@@ -19,7 +19,7 @@ const TREE = {id:"G", name:"농가 단위 가치 평가", children:[
   {id:"C", name:"경제", children:[{id:"C1",name:"수익성"},{id:"C2",name:"생산성"},{id:"C3",name:"안정성"}]},
 ]};
 /* ANP 영향 관계(DEMATEL 유의관계): "A>B" = A가 B에 영향을 준다 */
-const LINKS = "E1>E2 E1>E3 E1>E4 E1>S2 E1>C1 E1>C2 E1>C3 E2>E1 E2>E4 E2>S2 E2>C1 E2>C2 E2>C3 E4>C1 S1>E1 S1>S2 S1>S3 S1>C1 S1>C2 S1>C3 S2>C1 S2>C2 S3>S1 S3>S2 S3>C1 S3>C2 S3>C3 C1>S1 C1>S2 C1>S3 C1>C2 C1>C3 C2>S2 C2>C1 C2>C3 C3>S2 C3>C1 C3>C2";
+const LINKS = "E1>E2 E1>E4 E1>S1 E1>S2 E1>C1 E1>C2 E1>C3 E2>E4 E2>S2 E2>C1 E2>C2 E3>S2 E3>C1 E3>C2 E4>S2 E4>C1 E4>C2 S1>E1 S1>E2 S1>E4 S1>S2 S1>S3 S1>C1 S1>C2 S1>C3 S2>E2 S2>E4 S2>S1 S2>S3 S2>C1 S2>C2 S2>C3 S3>S1 S3>S2 S3>C1 S3>C2 S3>C3 C1>E1 C1>E2 C1>E4 C1>S1 C1>S2 C1>S3 C1>C2 C1>C3 C2>E1 C2>E2 C2>E4 C2>S1 C2>S2 C2>S3 C2>C1 C2>C3 C3>S1 C3>S2 C3>C1 C3>C2";
 const CR_LIMIT = 0.1;     // 비일관성 비율 기준
 const SHOCK = 0.1;        // 민감도 분석 충격 크기(±10%)
 const RESP_SHEET = "응답";
@@ -67,7 +67,9 @@ function anp_(res){
   });
   if(!ok) return null;
   const mul=(A,B)=>{ const C=Z(); for(let i=0;i<n;i++) for(let k=0;k<n;k++){ const a=A[i][k]; if(a) for(let j=0;j<n;j++) C[i][j]+=a*B[k][j]; } return C; };
-  let Pw=Wt; for(let k=0;k<12;k++) Pw=mul(Pw,Pw);           // W^4096
+  // 영향을 받지 않는 요소(예: 대기)가 있으면 열 합이 1보다 작아 값이 계속 줄어듦 → 매 단계 최댓값으로 나눠 언더플로 방지 (비율은 그대로)
+  const rescale=M=>{ let m=0; for(const r of M) for(const v of r) if(v>m) m=v; return m>0?M.map(r=>r.map(v=>v/m)):M; };
+  let Pw=Wt; for(let k=0;k<12;k++) Pw=rescale(mul(Pw,Pw));  // W^4096 (비율)
   const P2=mul(Pw,Wt);                                        // W^4097 (주기성 대비 평균)
   const lim=ELEMS.map((_,i)=>{ let s=0; for(let j=0;j<n;j++) s+=(Pw[i][j]+P2[i][j])/2; return s/n; });
   const tot=lim.reduce((a,b)=>a+b,0); const w=lim.map(x=>tot>0?x/tot:NaN);
@@ -292,7 +294,7 @@ function computeResults(){
     const ag=ELEMS.map(e=>R.aggW.global[e.id]), ng=ELEMS.map(e=>A.global[e.id]), ar=ranks(ag), nr=ranks(ng);
     ELEMS.forEach((e,i)=>s4.push([e.name, e.parent.name, r5(ag[i]), ar[i], r5(ng[i]), nr[i], r5(R.aggW.local[e.id]), r5(A.local[e.id])]));
     PILLARS.forEach(Pp=>s4.push([Pp.name+" 부문 합계","",r5(R.aggW.global[Pp.id]),"",r5(A.global[Pp.id])]));
-    s4.push(["※ ANP 극한 가중치는 다른 요소에 주는 영향을 반영합니다. 다른 요소에 유의한 영향을 주지 않는 요소는 0이 됩니다."]);
+    s4.push(["※ ANP 극한 가중치는 다른 요소에 주는 영향을 반영합니다. 다른 요소에 유의한 영향을 주지 않는 요소는 0이 됩니다. (DEMATEL 임계값: T 평균의 90%)"]);
     s4.push([]);
     s4.push(["부문 가중치 (열 = 영향을 받는 부문)"].concat(PILLARS.map(Pp=>Pp.name)));
     PILLARS.forEach(Ps=>s4.push([Ps.name].concat(PILLARS.map(Pt=>r5(A.CW[Pt.id][Ps.id]||0)))));

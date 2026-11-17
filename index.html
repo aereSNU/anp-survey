@@ -169,7 +169,7 @@ GROUPS.forEach(g=>{ g.kind="ahp"; });
    "A>B"는 A가 B에 유의한 영향을 준다는 뜻입니다. 본설문 DEMATEL 결과가 나오면 이 목록만 바꾸면 문항이 다시 만들어집니다.
    Code.gs의 LINKS도 똑같이 맞춰 주세요.
    E1 토양 · E2 수질 · E3 대기 · E4 생태 · S1 인적 기반 · S2 영농 활동 기반 · S3 지역사회 기반 · C1 수익성 · C2 생산성 · C3 안정성 */
-const LINKS = "E1>E2 E1>E3 E1>E4 E1>S2 E1>C1 E1>C2 E1>C3 E2>E1 E2>E4 E2>S2 E2>C1 E2>C2 E2>C3 E4>C1 S1>E1 S1>S2 S1>S3 S1>C1 S1>C2 S1>C3 S2>C1 S2>C2 S3>S1 S3>S2 S3>C1 S3>C2 S3>C3 C1>S1 C1>S2 C1>S3 C1>C2 C1>C3 C2>S2 C2>C1 C2>C3 C3>S2 C3>C1 C3>C2";
+const LINKS = "E1>E2 E1>E4 E1>S1 E1>S2 E1>C1 E1>C2 E1>C3 E2>E4 E2>S2 E2>C1 E2>C2 E3>S2 E3>C1 E3>C2 E4>S2 E4>C1 E4>C2 S1>E1 S1>E2 S1>E4 S1>S2 S1>S3 S1>C1 S1>C2 S1>C3 S2>E2 S2>E4 S2>S1 S2>S3 S2>C1 S2>C2 S2>C3 S3>S1 S3>S2 S3>C1 S3>C2 S3>C3 C1>E1 C1>E2 C1>E4 C1>S1 C1>S2 C1>S3 C1>C2 C1>C3 C2>E1 C2>E2 C2>E4 C2>S1 C2>S2 C2>S3 C2>C1 C2>C3 C3>S1 C3>S2 C3>C1 C3>C2";
 
 const PILLARS = TREE.children;
 const ELEMS = PILLARS.flatMap(p=>p.children);
@@ -202,7 +202,7 @@ const SCREEN_OF = {}; SCREENS.forEach((sc,i)=>sc.groups.forEach(g=>SCREEN_OF[g.i
 const RI = [0,0,0,0.58,0.90,1.12,1.24,1.32,1.41,1.45,1.49,1.51,1.48,1.56,1.57,1.59];
 const INTENSITY = {1:"동등하게",2:"동등~약간 더",3:"약간 더",4:"약간~상당히 더",5:"상당히 더",6:"상당히~매우 더",7:"매우 더",8:"매우~극히 더",9:"극히 더"};
 const STEPS = ["시작", ...SCREENS.map(sc=>sc.title), "확인"];
-const DRAFT_KEY = "ahp-farm-draft-v3";
+const DRAFT_KEY = "ahp-farm-draft-v4";
 
 /* ---------- AHP 계산 ---------- */
 const pairs = n => { const p=[]; for(let i=0;i<n;i++) for(let j=i+1;j<n;j++) p.push([i,j]); return p; };
