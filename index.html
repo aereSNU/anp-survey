@@ -39,7 +39,11 @@ p{margin:0}
 .tag{color:var(--muted);font-weight:400;font-size:.88em}
 .ind{display:flex;flex-direction:column;gap:2px;font-size:.82rem;color:var(--muted);border-left:2px solid var(--line);padding-left:10px}
 .ind b{color:var(--fg);font-weight:500}
-.ind .tgt{color:var(--fg);padding-bottom:4px;margin-bottom:4px;border-bottom:1px dashed var(--line)}
+.ind .tgt{color:var(--fg);padding-bottom:6px;margin-bottom:6px;border-bottom:1px dashed var(--line);font-size:.9rem}
+.ind .tgt .tname{color:var(--accent);font-weight:700;font-size:1.05rem}
+.tbadge{display:inline-block;font-size:.72rem;font-weight:700;color:var(--accent-fg);background:var(--accent);border-radius:4px;padding:1px 6px;vertical-align:2px}
+.qline{font-weight:500;line-height:1.9}
+.qline .tq{color:var(--accent);font-weight:700;font-size:1.12em;background:var(--accent-weak);border-radius:6px;padding:2px 8px;margin:0 2px;white-space:nowrap}
 .note.tr p{margin:.5em 0;line-height:1.7}
 .small{font-size:.85rem}
 .eyebrow{font-size:.75rem;letter-spacing:.08em;color:var(--muted);font-weight:600}
@@ -211,7 +215,7 @@ ELEMS.forEach(t=>{
     sub:`${Pt.name} 부문의 요소들이 받는 영향`, title:`부문 간 영향 → ${Pt.name}`,
     targetLabel:`${Pt.name} 부문의 요소들 (${Pt.children.map(c=>c.name).join(", ")})`,
     tnote:`'${Pt.name} 부문 내부'는 이 요소들끼리 서로 주고받는 영향을 뜻합니다.`,
-    q:`${Pt.name} 부문의 요소들이 받는 영향을 생각할 때, 어느 쪽에서 오는 영향이 더 크다고 보십니까?`}); });
+    q:`[${Pt.name} 부문의 요소들]이 받는 영향을 생각할 때, 어느 쪽에서 오는 영향이 더 크다고 보십니까?`}); });
   if(cgs.length) ANP_SCREENS.push({title:"부문 간 영향", heading:"부문 간 영향", groups:cgs}); }
 /* 설문 유형이 바뀌는 곳에 넣는 안내 화면 (문항 없음) */
 const T_PART2 = {title:"2부 안내", heading:"2부: 상호 영향 비교", eyebrow:"안내", transition:true, groups:[], paras:[
@@ -352,11 +356,13 @@ function groupBlock(g, showSub){
   const gs=S.g[g.id], n=g.items.length, anp=g.kind==="anp";
   const box=el("div",{class:"field",style:"gap:12px"});
   if(showSub) box.append(el("h3",{class:"sub"},g.sub));
-  box.append(el("p",{style:"font-weight:500"},g.q));
+  { /* [대상] 부분을 강조 표시 */
+    const m=String(g.q).match(/^(.*?)\[([^\]]+)\](.*)$/);
+    box.append(m ? el("p",{class:"qline"},m[1],el("span",{class:"tq"},m[2]),m[3]) : el("p",{style:"font-weight:500"},g.q)); }
   if(g.note) box.append(el("p",{class:"small muted"},g.note));
   { const lines=(g.ids||[]).filter(id=>INDICATORS[id]).map(id=>el("div",{},el("b",{},NODES[id].name)," — "+INDICATORS[id]));
     if(g.target||g.targetLabel){ const T=g.target?NODES[g.target]:null;
-      lines.unshift(el("div",{class:"tgt"}, "평가 대상: ", el("b",{}, T?`${T.name}(${T.parent.name})`:g.targetLabel), T&&INDICATORS[T.id]?" — "+INDICATORS[T.id]:"", g.tnote?el("div",{},g.tnote):"")); }
+      lines.unshift(el("div",{class:"tgt"}, el("span",{class:"tbadge"},"평가 대상"), " ", el("b",{class:"tname"}, T?`${T.name}(${T.parent.name})`:g.targetLabel), T&&INDICATORS[T.id]?" — "+INDICATORS[T.id]:"", g.tnote?el("div",{},g.tnote):"")); }
     if(lines.length) box.append(el("div",{class:"ind"},...lines)); }
   box.append(el("p",{class:"muted small"},"9 극히 · 7 매우 · 5 상당히 · 3 약간 · 1 동등"));
   const res=groupResult(g,gs);
