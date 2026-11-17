@@ -148,7 +148,7 @@ const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxjb7cBOST-OreiyItTq
    Code.gs의 TREE도 똑같이 맞춰 주세요. id는 한 번 정하면 바꾸지 마세요. */
 const TREE = {id:"G", name:"농가 단위 가치 평가", children:[
   {id:"E", name:"환경", children:[{id:"E1",name:"토양"},{id:"E2",name:"수질"},{id:"E3",name:"대기"},{id:"E4",name:"생태"}]},
-  {id:"S", name:"사회", children:[{id:"S1",name:"인적 기반"},{id:"S2",name:"영농 활동 기반"},{id:"S3",name:"지역사회 기반"}]},
+  {id:"S", name:"사회", children:[{id:"S1",name:"인적 기반"},{id:"S2",name:"영농 활동"},{id:"S3",name:"지역 사회"}]},
   {id:"C", name:"경제", children:[{id:"C1",name:"수익성"},{id:"C2",name:"생산성"},{id:"C3",name:"안정성"}]},
 ]};
 
@@ -186,7 +186,7 @@ GROUPS.forEach(g=>{ g.kind="ahp"; });
 /* ===== ANP 영향 관계 (DEMATEL 유의관계) =====
    "A>B"는 A가 B에 유의한 영향을 준다는 뜻입니다. 본설문 DEMATEL 결과가 나오면 이 목록만 바꾸면 문항이 다시 만들어집니다.
    Code.gs의 LINKS도 똑같이 맞춰 주세요.
-   E1 토양 · E2 수질 · E3 대기 · E4 생태 · S1 인적 기반 · S2 영농 활동 기반 · S3 지역사회 기반 · C1 수익성 · C2 생산성 · C3 안정성 */
+   E1 토양 · E2 수질 · E3 대기 · E4 생태 · S1 인적 기반 · S2 영농 활동 · S3 지역 사회 · C1 수익성 · C2 생산성 · C3 안정성 */
 const LINKS = "E1>E2 E1>E4 E1>S1 E1>S2 E1>C1 E1>C2 E1>C3 E2>E4 E2>S2 E2>C1 E2>C2 E3>S2 E3>C1 E3>C2 E4>S2 E4>C1 E4>C2 S1>E1 S1>E2 S1>E4 S1>S2 S1>S3 S1>C1 S1>C2 S1>C3 S2>E2 S2>E4 S2>S1 S2>S3 S2>C1 S2>C2 S2>C3 S3>S1 S3>S2 S3>C1 S3>C2 S3>C3 C1>E1 C1>E2 C1>E4 C1>S1 C1>S2 C1>S3 C1>C2 C1>C3 C2>E1 C2>E2 C2>E4 C2>S1 C2>S2 C2>S3 C2>C1 C2>C3 C3>S1 C3>S2 C3>C1 C3>C2";
 
 const PILLARS = TREE.children;

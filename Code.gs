@@ -15,7 +15,7 @@
 
 const TREE = {id:"G", name:"농가 단위 가치 평가", children:[
   {id:"E", name:"환경", children:[{id:"E1",name:"토양"},{id:"E2",name:"수질"},{id:"E3",name:"대기"},{id:"E4",name:"생태"}]},
-  {id:"S", name:"사회", children:[{id:"S1",name:"인적 기반"},{id:"S2",name:"영농 활동 기반"},{id:"S3",name:"지역사회 기반"}]},
+  {id:"S", name:"사회", children:[{id:"S1",name:"인적 기반"},{id:"S2",name:"영농 활동"},{id:"S3",name:"지역 사회"}]},
   {id:"C", name:"경제", children:[{id:"C1",name:"수익성"},{id:"C2",name:"생산성"},{id:"C3",name:"안정성"}]},
 ]};
 /* ANP 영향 관계(DEMATEL 유의관계): "A>B" = A가 B에 영향을 준다 */
