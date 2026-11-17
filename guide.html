@@ -6,108 +6,89 @@
 <title>응답 방법 안내 · 농가 평가체계 AHP·ANP 설문</title>
 <meta property="og:title" content="응답 방법 안내 · 농가 평가체계 AHP·ANP 설문">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600&family=Noto+Sans+KR:wght@500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap">
 <style>
-/* Layout: one narrow reading column; a stepper rail on top; each comparison is a ruled card with a 17-point scale. */
+/* 한 가지 글꼴, 흰 바탕. 설명은 본문, 화면 예시는 회색 판 위에 올리고 바로 아래 캡션으로 뜻을 적는다. */
 :root{
-  --bg:#f4f6f2; --surface:#ffffff; --fg:#1c231e; --muted:#5b665e; --line:#dbe1d9;
-  --accent:#3d6a48; --accent-fg:#ffffff; --accent-weak:#e2ebe2;
-  --warn:#a9521c; --warn-bg:#f8e9df; --ok:#2e7a4c; --ok-bg:#e1f0e6;
-  --display:"Noto Sans KR", "Noto Sans CJK KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
-  --body:"Noto Serif KR", "Noto Serif CJK KR", "AppleMyungjo", "Batang", serif;
-  --mono:"Noto Sans KR", "Noto Sans CJK KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --ink:#1b1f1c; --sub:#5b625d; --rule:#e2e5e2; --panel:#f3f4f2; --accent:#3d6a48;
+  --font:"Noto Sans KR","Noto Sans CJK KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  color-scheme:light;
 }
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#111512; --surface:#191f1b; --fg:#e4eae5; --muted:#99a59c; --line:#2b342e;
-  --accent:#86b691; --accent-fg:#0f1a12; --accent-weak:#22332670;
-  --warn:#e6955f; --warn-bg:#3a251a; --ok:#7fcb9b; --ok-bg:#1c3325; color-scheme:dark}}
-:root[data-theme="dark"]{
-  --bg:#111512; --surface:#191f1b; --fg:#e4eae5; --muted:#99a59c; --line:#2b342e;
-  --accent:#86b691; --accent-fg:#0f1a12; --accent-weak:#22332670;
-  --warn:#e6955f; --warn-bg:#3a251a; --ok:#7fcb9b; --ok-bg:#1c3325; color-scheme:dark}
-
 *{box-sizing:border-box}
-body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15.5px;line-height:1.7;margin:0;
-  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 64px}
-.wrap{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
-h1,h2{font-family:var(--display);font-weight:700;margin:0;line-height:1.35;text-wrap:balance}
-h1{font-size:1.75rem} h2{font-size:1.25rem}
+html,body{background:#fff}
+body{color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.75;margin:0;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:40px 64px;word-break:keep-all}
+.wrap{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:40px}
 p{margin:0}
-.eyebrow{font-size:.78rem;letter-spacing:.08em;color:var(--muted);font-weight:600}
-.lead{color:var(--muted)}
-.facts{display:flex;flex-wrap:wrap;gap:8px}
-.facts span{background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:4px 12px;font-size:.88rem}
-section.part{display:flex;flex-direction:column;gap:14px;border-top:3px solid var(--accent);padding-top:16px}
-.part-tag{font-family:var(--mono);font-size:.8rem;color:var(--accent);letter-spacing:.06em}
-h3{font-size:1.02rem;margin:6px 0 0;font-weight:600}
-.scale-t{border-collapse:collapse;font-size:.88rem;width:100%}
-.scale-t td{border:1px solid var(--line);padding:4px 6px;text-align:center}
-.scale-t tr:first-child td{font-family:var(--mono);color:var(--accent);font-weight:600}
-.flow{display:flex;flex-wrap:wrap;gap:6px;font-size:.88rem;align-items:center}
-.flow span{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:3px 10px}
-figure{margin:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--surface)}
-figure img{display:block;width:100%;height:auto}
-ul{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:4px}
-.tip{background:var(--accent-weak);border-radius:8px;padding:12px 14px;font-size:.93rem}
-.warn{background:var(--warn-bg);border-radius:8px;padding:12px 14px;font-size:.93rem}
-b.k{color:var(--accent)}
-.btn{display:inline-block;background:var(--accent);color:var(--accent-fg);text-decoration:none;font-weight:600;border-radius:8px;padding:10px 18px}
-a{color:var(--accent)}
-
-/* 안내문은 밝은 흰 배경 한 가지로 고정 (가독성 우선) */
-:root{--bg:#ffffff!important;--surface:#ffffff!important;--fg:#1a1f1b!important;--muted:#4f5a52!important;--line:#d5dcd4!important;--accent:#3d6a48!important;--accent-fg:#ffffff!important;--accent-weak:#eef3ee!important;--warn:#a9521c!important;--warn-bg:#ffffff!important;color-scheme:light!important}
-html,body{background:#ffffff}
-.tip,.warn{background:#ffffff;border:1px solid var(--line);border-left:4px solid var(--accent)}
-.warn{border-left-color:var(--warn)}
-.flow span{background:#ffffff}
-.lead{color:var(--muted)}
-figure{border-color:#c9d1c8}
-h3,.eyebrow,.part-tag,.flow,.scale-t,.btn{font-family:var(--display)}
-h3{font-weight:700}
-@media print{body{padding:0;font-size:11.5px;line-height:1.55}.wrap{gap:10px}section.part{gap:9px}.noprint{display:none}figure{break-inside:avoid;max-width:74%}section.part+section.part{break-before:page}.keep{break-inside:avoid}}
+h1{font-size:1.75em;font-weight:700;margin:0;line-height:1.35}
+h2{font-size:1.3em;font-weight:700;margin:0;line-height:1.4}
+h3{font-size:1.05em;font-weight:700;margin:0}
+.lab{font-size:.82em;color:var(--sub);letter-spacing:.04em;font-weight:500}
+.intro{display:flex;flex-direction:column;gap:10px}
+.intro .sub{color:var(--sub)}
+section{display:flex;flex-direction:column;gap:22px;border-top:1px solid var(--rule);padding-top:28px}
+.blk{display:flex;flex-direction:column;gap:10px}
+.part-h{display:flex;flex-direction:column;gap:2px}
+.part-h .lab{color:var(--accent);font-weight:700}
+table.scale{border-collapse:collapse;width:100%;font-size:.92em;text-align:center}
+table.scale td{padding:6px 4px;border-bottom:1px solid var(--rule)}
+table.scale tr:first-child td{font-weight:700}
+.ex{display:flex;flex-direction:column;gap:8px;margin:0}
+.ex .shot{background:var(--panel);border-radius:6px;padding:14px}
+.ex img{display:block;width:100%;height:auto;border-radius:4px}
+.ex figcaption{font-size:.93em;color:var(--sub);padding-left:2px}
+.ex figcaption b{color:var(--ink);font-weight:500}
+.note{font-size:.93em;color:var(--sub)}
+.note b{color:var(--ink);font-weight:500}
+@media print{
+  body{padding:0;font-size:11.5px;line-height:1.65}
+  .wrap{gap:12px} section{gap:9px;padding-top:10px} .blk{gap:5px} .intro{gap:6px} section+section{break-before:page;border-top:0}
+  .ex{break-inside:avoid;gap:4px} .ex .shot{padding:8px;width:70%}
+}
 </style>
 </head>
 <body>
 <div class="wrap">
-<header style="display:flex;flex-direction:column;gap:10px">
-  <span class="eyebrow">농업 빅데이터 및 기술경제 연구실</span>
+<div class="intro">
+  <span class="lab">농업 빅데이터 및 기술경제 연구실</span>
   <h1>설문 응답 방법 안내</h1>
-  <p class="lead">두 요소를 짝지어 비교하는 설문입니다. 1부는 중요도(AHP), 2부는 영향의 크기(ANP)를 묻습니다. 약 15분 걸립니다.</p>
-  <div class="flow"><span>성함 입력</span>→<span>1부 중요도 비교 15문항</span>→<span>2부 영향 비교 28문항</span>→<span>확인 후 제출</span></div>
-</header>
+  <p class="sub">두 요소를 짝지어 비교하는 설문입니다. 1부는 중요도(AHP), 2부는 영향의 크기(ANP)를 묻습니다. 성함을 입력하고 1부 15문항과 2부 28문항에 답한 뒤 확인 화면에서 제출하시면 됩니다. 약 15분 걸립니다.</p>
+</div>
 
-<section class="part">
-  <span class="part-tag">1부 · AHP</span>
-  <h2>중요도 비교</h2>
-  <p>같은 상위 항목에 속한 두 요소 중 <b>농가를 평가할 때 어느 쪽이 더 중요한지</b>, 그리고 얼마나 더 중요한지 고릅니다. 요소 이름 옆 괄호는 그 요소가 속한 부문입니다.</p>
-  <div class="keep">
-  <h3>척도 읽는 법</h3>
-  <table class="scale-t"><tr><td>1</td><td>3</td><td>5</td><td>7</td><td>9</td></tr><tr><td>동등</td><td>약간 더</td><td>상당히 더</td><td>매우 더</td><td>극히 더</td></tr></table>
-  <p class="lead" style="font-size:.88rem;margin-top:6px">가운데 1에서 더 중요한 요소 쪽으로 갈수록 숫자가 커집니다. 2·4·6·8은 그 사이 값입니다.</p>
+<section>
+  <div class="part-h"><span class="lab">1부 · AHP</span><h2>중요도 비교</h2></div>
+  <p>같은 상위 항목에 속한 두 요소 중 농가를 평가할 때 어느 쪽이 더 중요한지, 그리고 얼마나 더 중요한지 고릅니다. 요소 이름 옆 괄호는 그 요소가 속한 부문입니다.</p>
+  <div class="blk">
+    <h3>척도</h3>
+    <table class="scale"><tr><td>1</td><td>3</td><td>5</td><td>7</td><td>9</td></tr><tr><td>동등</td><td>약간 더</td><td>상당히 더</td><td>매우 더</td><td>극히 더</td></tr></table>
+    <p class="note">가운데 1에서 더 중요한 요소 쪽으로 갈수록 숫자가 커집니다. 2·4·6·8은 그 사이 값입니다.</p>
   </div>
-  <figure><img src="guide/a1-scale.png" alt="토양(환경)과 수질(환경) 비교에서 토양 쪽 3을 선택한 화면"></figure>
-  <p>위 예시는 <b>"토양이 수질보다 약간 더 중요하다(3)"</b>는 응답입니다.</p>
-  <div class="keep">
-  <h3>일관성 안내가 나오면</h3>
-  <p>숫자는 '몇 배'로 이어집니다. A가 B보다, B가 C보다 중요하다고 하셨다면 A는 C보다 더 중요해야 자연스럽습니다. 응답이 크게 어긋나면 가장 어긋난 문항이 붉게 표시됩니다.</p>
+  <figure class="ex"><div class="shot"><img src="guide/a1-scale.png" alt="토양(환경)과 수질(환경) 비교에서 토양 쪽 3을 선택한 화면"></div>
+    <figcaption>화면 예시 — 토양 쪽 3을 선택: <b>토양이 수질보다 약간 더 중요하다</b>는 뜻입니다.</figcaption></figure>
+  <div class="blk">
+    <h3>일관성 안내가 나오면</h3>
+    <p>숫자는 '몇 배'로 이어집니다. A가 B보다, B가 C보다 중요하다고 답하셨다면 A는 C보다 더 중요해야 자연스럽습니다. 응답이 크게 어긋나면 가장 어긋난 문항이 표시됩니다.</p>
   </div>
-  <figure><img src="guide/a2-cr.png" alt="일관성 부족 안내와 가장 어긋난 문항이 표시된 화면"></figure>
-  <div class="warn">표시된 문항이나 관련 문항을 다시 살펴봐 주세요. 검토 후에도 판단을 유지하시려면 <b>[검토했습니다. 현재 응답으로 진행]</b>을 누르시면 됩니다.</div>
+  <figure class="ex"><div class="shot"><img src="guide/a2-cr.png" alt="일관성 부족 안내와 가장 어긋난 문항이 표시된 화면"></div>
+    <figcaption>화면 예시 — 표시된 문항이나 관련 문항을 다시 살펴봐 주세요. 판단을 유지하시려면 <b>[검토했습니다. 현재 응답으로 진행]</b>을 누르시면 됩니다.</figcaption></figure>
 </section>
 
-<section class="part">
-  <span class="part-tag">2부 · ANP</span>
-  <h2>영향 비교</h2>
-  <p>여기서는 중요도가 아니라 <b>영향의 크기</b>를 묻습니다. 사전 조사(DEMATEL)에서 서로 영향이 있다고 나타난 관계만 나오며, 척도는 1부와 같습니다.</p>
-  <h3>요소 간 영향</h3>
-  <p>영향을 받는 요소를 기준으로, 같은 부문에 속한 두 요소 중 <b>어느 쪽이 그 요소를 더 크게 좌우하는지</b> 고릅니다.</p>
-  <figure><img src="guide/n1-anp.png" alt="수익성(경제)에 미치는 영향 측면에서 토양(환경)과 수질(환경)을 비교하는 화면"></figure>
-  <p>위 예시는 <b>"수익성을 더 크게 좌우하는 것은 수질보다 토양이며, 그 정도는 약간(3)"</b>이라는 응답입니다.</p>
-  <h3>부문 간 영향 (마지막 화면)</h3>
-  <p>한 부문의 요소들이 받는 영향이 <b>어느 부문에서 더 많이 오는지</b> 비교합니다. <b>'○○ 부문 내부'</b>는 그 부문 요소들끼리 서로 주고받는 영향입니다.</p>
-  <figure><img src="guide/n2-cluster.png" alt="환경 부문의 요소들이 받는 영향에서 환경 부문 내부와 사회 부문을 비교하는 화면"></figure>
-  <p>위 예시는 <b>"환경 요소들은 사회 요소들보다 환경 요소들끼리 주고받는 영향을 조금 더 크게 받는다(2)"</b>는 응답입니다.</p>
-  <div class="tip">마지막 확인 화면에서 묶음별 일관성을 확인하고 [제출하기]를 누르시면 끝납니다. 같은 성함으로 다시 제출하시면 이전 응답이 새 응답으로 바뀝니다.</div>
+<section>
+  <div class="part-h"><span class="lab">2부 · ANP</span><h2>영향 비교</h2></div>
+  <p>여기서는 중요도가 아니라 영향의 크기를 묻습니다. 사전 조사(DEMATEL)에서 서로 영향이 있다고 나타난 관계만 나오며, 척도는 1부와 같습니다.</p>
+  <div class="blk">
+    <h3>요소 간 영향</h3>
+    <p>영향을 받는 요소를 기준으로, 같은 부문에 속한 두 요소 중 어느 쪽이 그 요소를 더 크게 좌우하는지 고릅니다.</p>
+  </div>
+  <figure class="ex"><div class="shot"><img src="guide/n1-anp.png" alt="수익성(경제)에 미치는 영향 측면에서 토양(환경)과 수질(환경)을 비교하는 화면"></div>
+    <figcaption>화면 예시 — 토양 쪽 3을 선택: <b>수익성을 더 크게 좌우하는 것은 수질보다 토양이며, 그 정도는 약간</b>이라는 뜻입니다.</figcaption></figure>
+  <div class="blk">
+    <h3>부문 간 영향 (마지막 화면)</h3>
+    <p>한 부문의 요소들이 받는 영향이 어느 부문에서 더 많이 오는지 비교합니다. '○○ 부문 내부'는 그 부문 요소들끼리 서로 주고받는 영향입니다.</p>
+  </div>
+  <figure class="ex"><div class="shot"><img src="guide/n2-cluster.png" alt="환경 부문의 요소들이 받는 영향에서 환경 부문 내부와 사회 부문을 비교하는 화면"></div>
+    <figcaption>화면 예시 — 환경 부문 내부 쪽 2를 선택: <b>환경 요소들은 사회 요소들보다 환경 요소들끼리 주고받는 영향을 조금 더 받는다</b>는 뜻입니다.</figcaption></figure>
+  <p class="note">마지막 확인 화면에서 일관성을 확인하고 [제출하기]를 누르시면 끝납니다. 같은 성함으로 다시 제출하시면 이전 응답이 새 응답으로 바뀝니다.</p>
 </section>
 </div>
 </body>
