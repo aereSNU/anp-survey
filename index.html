@@ -40,10 +40,10 @@ p{margin:0}
 .ind{display:flex;flex-direction:column;gap:2px;font-size:.82rem;color:var(--muted);border-left:2px solid var(--line);padding-left:10px}
 .ind b{color:var(--fg);font-weight:500}
 .ind .tgt{color:var(--fg);padding-bottom:6px;margin-bottom:6px;border-bottom:1px dashed var(--line);font-size:.9rem}
-.ind .tgt .tname{color:var(--accent);font-weight:700;font-size:1.05rem}
+.ind .tgt .tname{color:var(--accent);font-weight:700}
 .tbadge{display:inline-block;font-size:.72rem;font-weight:700;color:var(--accent-fg);background:var(--accent);border-radius:4px;padding:1px 6px;vertical-align:2px}
-.qline{font-weight:500;line-height:1.9}
-.qline .tq{color:var(--accent);font-weight:700;font-size:1.12em;background:var(--accent-weak);border-radius:6px;padding:2px 8px;margin:0 2px;white-space:nowrap}
+.qline{font-weight:500;line-height:1.75}
+.qline .tq{color:var(--accent);font-weight:700;background:var(--accent-weak);border-radius:4px;padding:1px 6px;margin:0 1px;white-space:nowrap}
 .note.tr p{margin:.5em 0;line-height:1.7}
 .small{font-size:.85rem}
 .eyebrow{font-size:.75rem;letter-spacing:.08em;color:var(--muted);font-weight:600}
@@ -204,10 +204,10 @@ const clusterSources = Pt => PILLARS.filter(P=>Pt.children.some(t=>sourcesIn(t,P
 const ANP_SCREENS = [];
 ELEMS.forEach(t=>{
   const gs=[];
-  PILLARS.forEach(P=>{ const src=sourcesIn(t,P); if(src.length>=2) gs.push({id:`N.${t.id}.${P.id}`, kind:"anp", items:src.map(c=>`${c.name}(${P.name})`), ids:src.map(c=>c.id), target:t.id,
+  PILLARS.forEach(P=>{ const src=sourcesIn(t,P); if(src.length>=2) gs.push({id:`N.${t.id}.${P.id}`, kind:"anp", items:src.map(c=>c.name), ids:src.map(c=>c.id), target:t.id,
     sub:`${P.name} 부문 요소 사이의 비교`, title:`${t.name} ← ${P.name}`,
     q:`두 요소 중 어느 쪽이 변할 때 [${t.name}(${t.parent.name})]에 더 큰 변화가 생긴다고 보십니까?`}); });
-  if(gs.length) ANP_SCREENS.push({title:t.name, heading:`${t.name}(${t.parent.name})에 미치는 영향`, groups:gs});
+  if(gs.length) ANP_SCREENS.push({title:t.name, heading:`${t.name}에 미치는 영향`, groups:gs});
 });
 { const cgs=[];
   PILLARS.forEach(Pt=>{ const src=clusterSources(Pt); if(src.length>=2) cgs.push({id:`K.${Pt.id}`, kind:"anp",
@@ -362,7 +362,7 @@ function groupBlock(g, showSub){
   if(g.note) box.append(el("p",{class:"small muted"},g.note));
   { const lines=(g.ids||[]).filter(id=>INDICATORS[id]).map(id=>el("div",{},el("b",{},NODES[id].name)," — "+INDICATORS[id]));
     if(g.target||g.targetLabel){ const T=g.target?NODES[g.target]:null;
-      lines.unshift(el("div",{class:"tgt"}, el("span",{class:"tbadge"},"평가 대상"), " ", el("b",{class:"tname"}, T?`${T.name}(${T.parent.name})`:g.targetLabel), T&&INDICATORS[T.id]?" — "+INDICATORS[T.id]:"", g.tnote?el("div",{},g.tnote):"")); }
+      lines.unshift(el("div",{class:"tgt"}, el("span",{class:"tbadge"},"평가 대상"), " ", el("b",{class:"tname"}, T?T.name:g.targetLabel), T&&INDICATORS[T.id]?" — "+INDICATORS[T.id]:"", g.tnote?el("div",{},g.tnote):"")); }
     if(lines.length) box.append(el("div",{class:"ind"},...lines)); }
   box.append(el("p",{class:"muted small"},"9 극히 · 7 매우 · 5 상당히 · 3 약간 · 1 동등"));
   const res=groupResult(g,gs);
